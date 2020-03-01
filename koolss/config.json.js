@@ -1,9 +1,9 @@
 {
 "version":"2.2.2",
-"md5":"898cbc05fd75908d4a99d7320bcca000",
+"md5":"ea55d71bd9099c38802e01f4013e3b7c",
 "home_url":"Module_koolss.asp",
 "title":"科学上网插件",
 "description":"轻松科学上网~",
-"changelog":"支持2.30",
-"build_date":"2019-03-09_20:18:10"
+"changelog":"修复dns，字符串检测等bug",
+"build_date":"2020-03-02_04:06:54"
 }

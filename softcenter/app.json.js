@@ -474,11 +474,11 @@
             "version": "0.8"
         }, 
         {
-            "build_date": "2019-03-09_20:18:10", 
-            "changelog": "支持2.30", 
+            "build_date": "2020-03-02_04:06:54", 
+            "changelog": "修复dns，字符串检测等bug", 
             "description": "轻松科学上网~", 
             "home_url": "Module_koolss.asp", 
-            "md5": "898cbc05fd75908d4a99d7320bcca000", 
+            "md5": "ea55d71bd9099c38802e01f4013e3b7c", 
             "name": "koolss", 
             "tar_url": "koolss/koolss.tar.gz", 
             "title": "科学上网插件", 
