@@ -16,7 +16,7 @@ check_run_system(){
 	hbipk="shadowsocksRR-server"
 	for hbipk in $hbipk
 	do
-		if [ -z `opkg list-installed | grep $hbipk` ]; then
+		if [ -z "`opkg list-installed | grep $hbipk`" ]; then
 			echo_date "安装支持环境-$ipknum"
 			wget --no-check-certificate --timeout=8 --tries=2 -O - https://lede-opkg.koolcenter.com/opkg/$hbipk.ipk > /tmp/upload/$hbipk.ipk
 			if [ "$?" -eq 0 ] ; then
@@ -142,12 +142,21 @@ case $1 in
 port)
 	open_port
 	;;
+stop)
+	cat /dev/null >$LOGFILE
+	stop_ssrserver >> $LOGFILE
+	remove_nat_start >> $LOGFILE
+	echo_date "所有服务已关闭！" >> $LOGFILE
+	echo XU6J03M6 >> $LOGFILE
+    ;;
 *)
 	if [ "$ssrserver_enable" == "1" ]; then
 		[ -f "/tmp/ssrserver.locker" ] && exit 0
 		cat /dev/null >$LOGFILE
 		touch /tmp/ssrserver.locker
 		stop_ssrserver >> $LOGFILE
+		remove_nat_start >> $LOGFILE
+		echo_date "所有服务已关闭！" >> $LOGFILE
 		start_ssrserver >> $LOGFILE
 		rm -rf /tmp/ssrserver.locker
 		echo XU6J03M6 >> $LOGFILE

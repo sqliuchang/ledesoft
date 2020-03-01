@@ -16,9 +16,9 @@ eval `dbus export ssrserver_`
 
 
 start(){
-	[ "$ssrserver_enable" == "1" ] && /koolshare/scripts/ssrserver_config.sh
+	[ "$ssrserver_enable" == "1" ] && /koolshare/scripts/ssrserver_config.sh start
 }
 
 stop(){
-	/koolshare/scripts/ssrserver_config.sh
+	/koolshare/scripts/ssrserver_config.sh stop
 }
