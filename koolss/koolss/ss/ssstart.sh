@@ -405,6 +405,7 @@ start_haproxy(){
 		    mode                    tcp
 		    log                     global
 		    option                  tcplog
+		    option                  allbackups
 		    option                  dontlognull
 		    option http-server-close
 		    #option forwardfor      except 127.0.0.0/8
