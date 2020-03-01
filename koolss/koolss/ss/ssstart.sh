@@ -818,18 +818,7 @@ create_dnsmasq_conf(){
 	
 	echo_date 生成cdn加速列表到/tmp/sscdn.conf，加速用的dns：$CDN
 	echo "#for china site CDN acclerate" >> /tmp/sscdn.conf
-	cat $KSROOT/ss/rules/cdn.txt | sed "s/^/server=&\/./g" | sed "s/$/\/&$CDN/g" | sort | awk '{if ($0!=line) print;line=$0}' >>/tmp/sscdn.conf
-
-	# append user defined china site
-	if [ -n "$ss_isp_website_web" ];then
-		cdnsites=$(echo $ss_isp_website_web | base64_decode)
-		echo_date 生成自定义cdn加速域名到/tmp/sscdn.conf
-		echo "#for user defined china site CDN acclerate" >> /tmp/sscdn.conf
-		for cdnsite in $cdnsites
-		do
-			echo "$cdnsite" | sed "s/^/server=&\/./g" | sed "s/$/\/&$CDN/g" >> /tmp/sscdn.conf
-		done
-	fi
+	cat $KSROOT/ss/rules/cdn.txt | sed "s/^/server=&\/./g" | sed "s/$/\/&$CDN#53/g" | sort | awk '{if ($0!=line) print;line=$0}' >>/tmp/sscdn.conf
 	
 	if [ -n "$ss_dnsmasq" ];then
 		echo_date 添加自定义dnsmasq设置到/tmp/custom.conf
@@ -853,10 +842,20 @@ create_dnsmasq_conf(){
 	echo "server=/.apnic.net/127.0.0.1#7913" >> /tmp/wblist.conf
 	echo "ipset=/.apnic.net/router" >> /tmp/wblist.conf
 	echo "server=/.openwrt.org/127.0.0.1#7913" >> /tmp/wblist.conf
-	echo "ipset=/.openwrt.org/router" >> /tmp/wblist.conf		
+	echo "ipset=/.openwrt.org/router" >> /tmp/wblist.conf
+	# append user defined china site
+	if [ -n "$ss_isp_website_web" ];then
+		cdnsites=$(echo $ss_isp_website_web | base64_decode)
+		echo_date 应用自定义cdn加速域名
+		echo "#for user defined china site CDN acclerate" >> /tmp/wblist.conf
+		for cdnsite in $cdnsites
+		do
+			echo "$cdnsite" | sed "s/^/server=&\/./g" | sed "s/$/\/&$CDN#53/g" >> /tmp/wblist.conf
+		done
+	fi
 	# append white domain list,not through ss
-	wanwhitedomain=$(echo $ss_wan_white_domain | base64_decode)
 	if [ -n "$ss_wan_white_domain" ];then
+		wanwhitedomain=$(echo $ss_wan_white_domain | base64_decode)
 		echo_date 应用域名白名单
 		echo "#for white_domain" >> //tmp/wblist.conf
 		for wan_white_domain in $wanwhitedomain
@@ -874,8 +873,8 @@ create_dnsmasq_conf(){
 	done
 	
 	# append black domain list,through ss
-	wanblackdomain=$(echo $ss_wan_black_domain | base64_decode)
 	if [ -n "$ss_wan_black_domain" ];then
+		wanblackdomain=$(echo $ss_wan_black_domain | base64_decode)
 		echo_date 应用域名黑名单
 		echo "#for black_domain" >> /tmp/wblist.conf
 		for wan_black_domain in $wanblackdomain
@@ -898,10 +897,6 @@ create_dnsmasq_conf(){
 		echo_date 创建域名黑/白名单软链接到/tmp/dnsmasq.d/wblist.conf
 		mv /tmp/wblist.conf /tmp/dnsmasq.d/wblist.conf
 	fi
-	if [ -f /tmp/sscdn.conf ];then
-		echo_date 创建cdn加速列表软链接/tmp/dnsmasq.d/cdn.conf
-		mv /tmp/sscdn.conf /tmp/dnsmasq.d/cdn.conf
-	fi
 	echo_date 创建gfwlist的软连接到/tmp/dnsmasq.d/文件夹.
 	[ ! -L "/tmp/dnsmasq.d/gfwlist.conf" ] && ln -sf $KSROOT/ss/rules/gfwlist.conf /tmp/dnsmasq.d/gfwlist.conf
 	
@@ -923,7 +918,12 @@ create_dnsmasq_conf(){
 	else
 		#echo_date DNS解析方案国外优先，优先解析国外DNS.
 		echo "server=127.0.0.1#7913" >> /tmp/dnsmasq.d/ssserver.conf
+		if [ -f /tmp/sscdn.conf ];then
+			echo_date 创建cdn加速列表软链接/tmp/dnsmasq.d/cdn.conf
+			mv /tmp/sscdn.conf /tmp/dnsmasq.d/cdn.conf
+		fi
 	fi
+	rm -rf /tmp/sscdn.conf
 	[ "$ss_mwan_china_dns_dst" != "0" ] && [ -n "$CDN" ] && route_add $ss_mwan_china_dns_dst $CDN
 	[ "$ss_mwan_china_dns_dst" != "0" ] && [ -n "$CDN2" ] && [ "$CDN" != "$CDN2" ] && route_add $ss_mwan_china_dns_dst $CDN2
 }
@@ -1038,7 +1038,7 @@ flush_nat(){
 	iptables -t mangle -F SHADOWSOCKS_GLO > /dev/null 2>&1 && iptables -t mangle -X SHADOWSOCKS_GLO > /dev/null 2>&1
 
 	chromecast_nu=`iptables -t nat -L PREROUTING -v -n --line-numbers|grep "dpt:53"|awk '{print $1}'`
-	[ `dbus get koolproxy_enable` -ne 1 ] && iptables -t nat -D PREROUTING $chromecast_nu >/dev/null 2>&1
+	[ "`dbus get koolproxy_enable`" != "1" ] && iptables -t nat -D PREROUTING $chromecast_nu >/dev/null 2>&1
 
 	#flush_ipset
 	echo_date 先清空已存在的ipset名单，防止重复添加
@@ -1084,7 +1084,7 @@ add_white_black_ip(){
 		ipset -! add black_list $ip >/dev/null 2>&1
 	done
 	
-	if [ ! -z $ss_wan_black_ip ];then
+	if [ ! -z "$ss_wan_black_ip" ];then
 		ss_wan_black_ip=`dbus get ss_wan_black_ip|base64_decode|sed '/\#/d'`
 		echo_date 应用IP/CIDR黑名单
 		for ip in $ss_wan_black_ip
@@ -1105,7 +1105,7 @@ add_white_black_ip(){
 		ipset -! add white_list $ip >/dev/null 2>&1
 	done
 	
-	if [ ! -z $ss_wan_white_ip ];then
+	if [ ! -z "$ss_wan_white_ip" ];then
 		ss_wan_white_ip=`echo $ss_wan_white_ip|base64_decode|sed '/\#/d'`
 		echo_date 应用IP/CIDR白名单
 		for ip in $ss_wan_white_ip
