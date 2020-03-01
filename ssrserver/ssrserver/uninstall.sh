@@ -19,11 +19,10 @@ rm -rf $KSROOT/webs/res/icon-ssrserver.png
 rm -rf $KSROOT/webs/res/icon-ssrserver-bg.png
 rm -rf /etc/rc.d/S99ssrserver.sh
 
-dbus remove softcenter_module_ssrserver_home_url
-dbus remove softcenter_module_ssrserver_install
-dbus remove softcenter_module_ssrserver_md5
-dbus remove softcenter_module_ssrserver_version
-dbus remove softcenter_module_ssrserver_name
 dbus remove softcenter_module_ssrserver_description
+dbus remove softcenter_module_ssrserver_install
+dbus remove softcenter_module_ssrserver_name
+dbus remove softcenter_module_ssrserver_title
+dbus remove softcenter_module_ssrserver_version
 
 rm -rf $KSROOT/scripts/uninstall_ssrserver.sh

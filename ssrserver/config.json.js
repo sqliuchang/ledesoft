@@ -1,9 +1,9 @@
 {
-"version":"0.3",
-"md5":"51d10983e52ae7782a93a925fca5f2a4",
+"version":"0.4",
+"md5":"695959f13b3c2bd7bf1913c1611acf22",
 "home_url":"Module_ssrserver.asp",
 "title":"SSR Server",
 "description":"科学上网服务器",
-"changelog":"修复安装包下载的问题",
-"build_date":"2017-12-28_14:17:14"
+"changelog":"开源加密脚本;init脚本提供stop选项;优化安装环境检测",
+"build_date":"2020-03-02_02:02:53"
 }

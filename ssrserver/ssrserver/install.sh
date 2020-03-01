@@ -18,7 +18,7 @@ dbus set softcenter_module_ssrserver_description=科学上网服务器
 dbus set softcenter_module_ssrserver_install=1
 dbus set softcenter_module_ssrserver_name=ssrserver
 dbus set softcenter_module_ssrserver_title="SSR Server"
-dbus set softcenter_module_ssrserver_version=0.1
+dbus set softcenter_module_ssrserver_version=0.4
 
 sleep 1
 rm -rf /tmp/ssrserver >/dev/null 2>&1
