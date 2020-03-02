@@ -1,9 +1,9 @@
 {
-"version":"0.2.3",
-"md5":"1db81c9a93ff2f4a7d6cc1d657c57eec",
+"version":"0.2.4",
+"md5":"089ecbc6d81a410d6f79941ccbefe3cf",
 "home_url":"Module_docker.asp",
 "title":"Docker",
 "description":"轻量虚拟化应用程序",
-"changelog":"修复创建容器的错误",
-"build_date":"2019-02-12_22:32:00"
+"changelog":"修复--group参数造成的开机自启失败;更新docker至v19.03.5",
+"build_date":"2020-03-02_19:42:37"
 }

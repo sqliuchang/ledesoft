@@ -1,11 +1,11 @@
 #!/bin/sh
 
 MODULE=docker
-VERSION=0.2.3
+VERSION=0.2.4
 TITLE="Docker"
 DESCRIPTION="轻量虚拟化应用程序"
 HOME_URL=Module_docker.asp
-CHANGELOG="修复创建容器的错误"
+CHANGELOG="修复--group参数造成的开机自启失败;更新docker至v19.03.5"
 
 # Check and include base
 DIR="$( cd "$( dirname "$BASH_SOURCE[0]" )" && pwd )"
