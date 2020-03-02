@@ -341,12 +341,7 @@ stop_docker(){
 # used by rc.d
 case $1 in
 start)
-	if [ "$docker_basic_enable" == "1" ];then
 		restart_docker
-	else
-		stop_docker
-		echo_date ============================ docker 成功关闭 ============================
-    fi
 	;;
 stop)
 	stop_docker
