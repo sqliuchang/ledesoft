@@ -19,5 +19,5 @@ start(){
 }
 
 stop(){
-	/koolshare/scritps/webrecord_config.sh stop
+	/koolshare/scripts/webrecord_config.sh stop
 }

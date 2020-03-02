@@ -19,5 +19,5 @@ start(){
 }
 
 stop(){
-	/koolshare/scritps/mia_config.sh stop
+	/koolshare/scripts/mia_config.sh stop
 }

@@ -19,5 +19,5 @@ start(){
 }
 
 stop(){
-	/koolshare/scritps/v2ray_config.sh stop
+	/koolshare/scripts/v2ray_config.sh stop
 }

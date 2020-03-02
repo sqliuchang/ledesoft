@@ -19,5 +19,5 @@ start(){
 }
 
 stop(){
-	/koolshare/scritps/wireguard_config.sh stop
+	/koolshare/scripts/wireguard_config.sh stop
 }

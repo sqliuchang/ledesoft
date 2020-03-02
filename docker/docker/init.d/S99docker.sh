@@ -19,5 +19,5 @@ start(){
 }
 
 stop(){
-	/koolshare/scritps/docker_config.sh stop
+	/koolshare/scripts/docker_config.sh stop
 }
