@@ -77,8 +77,8 @@ start_process(){
 			--selinux-enabled=false \
 			--ip-forward=true \
 			--ip="0.0.0.0" \
-			--group root & \ 
-			>/dev/null 2>&1
+			--group="root" \
+			> /dev/null 2>&1 &
 }
 
 stop_process(){
