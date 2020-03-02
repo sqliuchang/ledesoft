@@ -33,7 +33,7 @@ install_run_system(){
 	mkdir -p "$docker_basic_disk/docker/data"
 	mkdir -p "$docker_basic_disk/docker/config"
 	echo_date "开始下载运行环境"
-	wget --no-check-certificate --timeout=8 --tries=2 -O - https://download.docker.com/linux/static/stable/x86_64/docker-18.09.1.tgz > /tmp/upload/docker.tgz
+	wget --no-check-certificate --timeout=8 --tries=2 -O - https://download.docker.com/linux/static/stable/x86_64/docker-19.03.5.tgz > /tmp/upload/docker.tgz
 	if [ "$?" -eq 0 ] ; then
 		tar zxf /tmp/upload/docker.tgz -C "$docker_basic_disk/docker"
 		mv $docker_basic_disk/docker/docker $docker_basic_disk/docker/bin
