@@ -19,5 +19,5 @@ start(){
 }
 
 stop(){
-	/koolshare/scripts/docker_config.sh stop
+	/koolshare/scripts/docker_config.sh stop > /tmp/upload/docker_log.txt
 }
