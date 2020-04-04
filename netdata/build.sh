@@ -5,6 +5,7 @@ VERSION=0.1
 TITLE=路由监控
 DESCRIPTION=仪表式查看路由详细状态
 HOME_URL=Module_netdata.asp
+CHANGELOG="开源加密脚本"
 
 # Check and include base
 DIR="$( cd "$( dirname "$BASH_SOURCE[0]" )" && pwd )"
