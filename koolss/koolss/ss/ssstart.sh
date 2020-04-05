@@ -193,6 +193,11 @@ kill_process(){
 		echo_date 关闭cdns进程...
 		killall cdns
 	fi
+	# kill v2ray-plugin
+	if [ -n "`pidof v2ray-plugin`" ];then
+		echo_date 关闭v2ray-plugin进程...
+		killall v2ray-plugin
+	fi
 }
 
 kill_cron_job(){
@@ -313,9 +318,11 @@ ss_arg(){
 		elif [ "$ss_basic_ss_obfs" == "obfs-tls" ];then
 			ARG_OBFS="--plugin obfs-local --plugin-opts obfs=tls;obfs-host=$ss_basic_ss_obfs_host"
 		elif [ "$ss_basic_ss_obfs" == "v2ray-http" ];then
-			ARG_OBFS="--plugin v2ray-plugin"
+			ARG_OBFS="--plugin v2ray-plugin --plugin-opts host=$ss_basic_ss_obfs_host"
 		elif [ "$ss_basic_ss_obfs" == "v2ray-tls" ];then
 			ARG_OBFS="--plugin v2ray-plugin --plugin-opts tls;host=$ss_basic_ss_obfs_host"
+		elif [ "$ss_basic_ss_obfs" == "v2ray-tls-path" ];then
+			ARG_OBFS="--plugin v2ray-plugin --plugin-opts tls;$ss_basic_ss_obfs_host"
 		elif [ "$ss_basic_ss_obfs" == "v2ray-quic" ];then
 			ARG_OBFS="--plugin v2ray-plugin --plugin-opts mode=quic;host=$ss_basic_ss_obfs_host"
 		else
@@ -914,7 +921,7 @@ create_dnsmasq_conf(){
 			#echo_date DNS解析方案国内优先，使用自定义DNS：$CDN进行解析国内DNS.
 			echo "server=$CDN#53" >> /tmp/dnsmasq.d/ssserver.conf
 		fi
-
+	
 	else
 		#echo_date DNS解析方案国外优先，优先解析国外DNS.
 		echo "server=127.0.0.1#7913" >> /tmp/dnsmasq.d/ssserver.conf
@@ -1019,6 +1026,8 @@ flush_nat(){
 	# flush iptables rules
 	iptables -t nat -D OUTPUT -j SHADOWSOCKS > /dev/null 2>&1
 	iptables -t nat -D OUTPUT -p tcp -m set --match-set router dst -j REDIRECT --to-ports 3333 > /dev/null 2>&1
+	iptables -t nat -D OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 3333 > /dev/null 2>&1
+	iptables -t nat -D OUTPUT -p tcp -m set --match-set black_list dst -j REDIRECT --to-ports 3333 > /dev/null 2>&1
 	nat_indexs=`iptables -nvL PREROUTING -t nat |sed 1,2d | sed -n '/SHADOWSOCKS/='|sort -r`
 	for nat_index in $nat_indexs
 	do
@@ -1314,6 +1323,8 @@ apply_nat_rules(){
 	# router itself
 	iptables -t nat -I OUTPUT -j SHADOWSOCKS
 	iptables -t nat -A OUTPUT -p tcp -m set --match-set router dst -j REDIRECT --to-ports 3333
+	iptables -t nat -A OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 3333
+	iptables -t nat -A OUTPUT -p tcp -m set --match-set black_list dst -j REDIRECT --to-ports 3333
 }
 
 chromecast(){

@@ -5,7 +5,7 @@ VERSION=`cat koolss/ss/version`
 TITLE=科学上网插件
 DESCRIPTION="轻松科学上网~"
 HOME_URL=Module_koolss.asp
-CHANGELOG="修复dns，字符串检测等bug"
+CHANGELOG="同步上游更新"
 
 # Check and include base
 DIR="$( cd "$( dirname "$BASH_SOURCE[0]" )" && pwd )"
