@@ -106,11 +106,12 @@ stop_ssrserver(){
 	echo_date "====================================================="
 	close_port
 	echo_date "停止已经运行的服务！"
-	/usr/bin/python /usr/share/ssr/shadowsocks/server.py  \
-	-c $CONFIG_FILE  \
-	--pid-file $PID_FILE  \
-	--log-file $LOGFILE  \
-	-d stop >/dev/null 2>&1 &
+	start-stop-daemon -K -p $PID_FILE || true
+	##/usr/bin/python /usr/share/ssr/shadowsocks/server.py  \
+	##-c $CONFIG_FILE  \
+	##--pid-file $PID_FILE  \
+	##--log-file $LOGFILE  \
+	##-d stop >/dev/null 2>&1 &
 }
 
 start_ssrserver(){
@@ -119,11 +120,12 @@ start_ssrserver(){
 	gen_config_file
 	echo_date "开始运行服务"
 	mkdir -p  /var/etc
-	/usr/bin/python /usr/share/ssr/shadowsocks/server.py  \
-	-c $CONFIG_FILE  \
-	--pid-file $PID_FILE  \
-	--log-file $LOGFILE  \
-	-d start >/dev/null 2>&1 &
+	##/usr/bin/python /usr/share/ssr/shadowsocks/server.py  \
+	##-c $CONFIG_FILE  \
+	##--pid-file $PID_FILE  \
+	##--log-file $LOGFILE  \
+	##-d start >/dev/null 2>&1 &
+	start-stop-daemon -S -q -b -m -p $PID_FILE -x /usr/bin/python -- /usr/share/ssr/shadowsocks/server.py -c $CONFIG_FILE --pid-file $PID_FILE --log-file $LOGFILE -d start
 	open_port
 	write_nat_start
 	echo_date "服务已开启！页面将在3秒后刷新"
