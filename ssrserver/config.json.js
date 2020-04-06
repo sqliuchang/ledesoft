@@ -1,9 +1,9 @@
 {
-"version":"0.4",
-"md5":"695959f13b3c2bd7bf1913c1611acf22",
+"version":"0.5",
+"md5":"9ae1c22286d412ff1d4d29d4c8716fac",
 "home_url":"Module_ssrserver.asp",
 "title":"SSR Server",
 "description":"科学上网服务器",
-"changelog":"开源加密脚本;init脚本提供stop选项;优化安装环境检测",
-"build_date":"2020-03-02_02:02:53"
+"changelog":"尝试使用start-stop-daemon来实现进程守护",
+"build_date":"2020-04-07_01:03:41"
 }

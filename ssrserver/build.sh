@@ -1,11 +1,11 @@
 #!/bin/sh
 
 MODULE=ssrserver
-VERSION=0.4
+VERSION=0.5
 TITLE="SSR Server"
 DESCRIPTION=科学上网服务器
 HOME_URL=Module_ssrserver.asp
-CHANGELOG="开源加密脚本;init脚本提供stop选项;优化安装环境检测"
+CHANGELOG="尝试使用start-stop-daemon来实现进程守护"
 
 # Check and include base
 DIR="$( cd "$( dirname "$BASH_SOURCE[0]" )" && pwd )"
