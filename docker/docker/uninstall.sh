@@ -16,6 +16,7 @@ done
 sleep 1
 rm -rf $KSROOT/scripts/docker*
 rm -rf $KSROOT/init.d/S99docker.sh
+rm -rf $KSROOT/init.d/K10docker.sh
 rm -rf $KSROOT/webs/Module_docker.asp
 rm -rf $KSROOT/webs/res/icon-docker.png
 rm -rf $KSROOT/webs/res/icon-docker-bg.png

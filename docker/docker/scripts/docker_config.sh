@@ -310,6 +310,7 @@ get_container_info(){
 
 creat_start_up(){
 	[ ! -L "/etc/rc.d/S99docker.sh" ] && ln -sf $KSROOT/init.d/S99docker.sh /etc/rc.d/S99docker.sh
+	[ ! -L "/etc/rc.d/K10docker.sh" ] && ln -sf $KSROOT/init.d/S99docker.sh /etc/rc.d/K10docker.sh
 }
 
 start_docker(){
