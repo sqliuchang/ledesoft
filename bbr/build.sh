@@ -5,7 +5,7 @@ VERSION=0.4
 TITLE="BBR MOD"
 DESCRIPTION=魔改BBR
 HOME_URL=Module_bbr.asp
-CHANGELOG="修改bbrplus模块名称"
+CHANGELOG="开源加密脚本"
 
 # Check and include base
 DIR="$( cd "$( dirname "$BASH_SOURCE[0]" )" && pwd )"

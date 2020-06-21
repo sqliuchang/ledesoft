@@ -1,9 +1,9 @@
 {
 "version":"0.4",
-"md5":"c3c59f621e7577e3cc645a88c9e65583",
+"md5":"886c4d794e1bd2b028c2d02893f7783c",
 "home_url":"Module_bbr.asp",
 "title":"BBR MOD",
 "description":"魔改BBR",
-"changelog":"修改bbrplus模块名称",
-"build_date":"2019-03-09_15:14:20"
+"changelog":"开源加密脚本",
+"build_date":"2020-06-21_21:40:49"
 }

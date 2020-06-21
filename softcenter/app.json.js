@@ -386,22 +386,22 @@
             "version": "0.1"
         }, 
         {
-            "build_date": "2019-05-07_20:32:14", 
-            "changelog": "增加本地端口流量标记", 
+            "build_date": "2020-06-21_21:39:13", 
+            "changelog": "开源加密脚本", 
             "description": "模块化的代理软件包", 
             "home_url": "Module_v2ray.asp", 
-            "md5": "8eb2acf2941bea79a10e56e1e973cf5c", 
+            "md5": "4bf28f636f9b51baaec9477099e65d74", 
             "name": "v2ray", 
             "tar_url": "v2ray/v2ray.tar.gz", 
             "title": "V2Ray", 
             "version": "2.3.7"
         }, 
         {
-            "build_date": "2019-03-09_15:14:20", 
-            "changelog": "修改bbrplus模块名称", 
+            "build_date": "2020-06-21_21:40:49", 
+            "changelog": "开源加密脚本", 
             "description": "魔改BBR", 
             "home_url": "Module_bbr.asp", 
-            "md5": "c3c59f621e7577e3cc645a88c9e65583", 
+            "md5": "886c4d794e1bd2b028c2d02893f7783c", 
             "name": "bbr", 
             "tar_url": "bbr/bbr.tar.gz", 
             "title": "BBR MOD", 
