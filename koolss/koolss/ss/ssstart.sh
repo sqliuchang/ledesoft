@@ -488,14 +488,14 @@ start_haproxy(){
 					ha_resolved_action $lb_dest
 				else
 					echo_date 【"$nick_name"】节点ip解析失败，尝试获取以前储存的ip.
-					if [ "ss_lb_type" == 1 ];then
+					if [ "$ss_lb_type" == 1 ];then
 						lb_server_ip=`dbus get ssconf_basic_server_ip_$node`
 					else
 						lb_server_ip=`dbus get ssrconf_basic_server_ip_$node`
 					fi
 					if [ -z "$lb_server_ip" ];then
 						echo_date 【"$nick_name"】没有获取到以前储存的ip，将由haproxy自己尝试解析.
-						if [ "ss_lb_type" == 1 ];then
+						if [ "$ss_lb_type" == 1 ];then
 							lb_server=`dbus get ssconf_basic_server_$node`
 						else
 							lb_server=`dbus get ssrconf_basic_server_$node`
