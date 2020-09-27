@@ -864,9 +864,9 @@ check_update_v2ray(){
 	local lastver oldver
 	echo_date 开始检查 v2ray 最新版本。。。
 	if [ "$v2ray_basic_check_releases" == "0" ]; then
-		lastver=$(wget --no-check-certificate --timeout=8 --tries=2 -qO- "https://github.com/v2ray/v2ray-core/tags"| grep "/v2ray/v2ray-core/releases/tag/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//') 
+		lastver=$(wget --no-check-certificate --timeout=8 --tries=2 -qO- "https://github.com/v2fly/v2ray-core/tags"| grep "/v2fly/v2ray-core/releases/tag/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//') 
 	else
-		lastver=$(get_latest_release "v2ray/v2ray-core")
+		lastver=$(get_latest_release "v2fly/v2ray-core")
 	fi
 	oldver="v$(v2ray -version|cut -d" " -f 2|sed -n 1p)"
 	if [ -n "$lastver" ]; then 
@@ -879,7 +879,7 @@ check_update_v2ray(){
 			echo XU6J03M6
 		else
 			echo_date "准备升级到最新版本，开始下载"
-			wget --no-check-certificate --timeout=8 -a $LOG_FILE --tries=2 -O - "https://github.com/v2ray/v2ray-core/releases/download/${lastver}/v2ray-linux-64.zip" > /tmp/v2ray_update.zip
+			wget --no-check-certificate --timeout=8 -a $LOG_FILE --tries=2 -O - "https://github.com/v2fly/v2ray-core/releases/download/${lastver}/v2ray-linux-64.zip" > /tmp/v2ray_update.zip
 			#curl -r 0-100 -L - "https://github.com/v2ray/v2ray-core/releases/download/${lastver}/v2ray-linux-64.zip" -o /tmp/v2ray_update.zip
 			if [ "$?" -eq 0 ] ; then
 				echo_date "最新版本已下载，准备安装"
